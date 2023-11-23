@@ -1,4 +1,3 @@
-from gurobipy import *
 import pypsa
 import pandas as pd
 from dataclasses import dataclass
