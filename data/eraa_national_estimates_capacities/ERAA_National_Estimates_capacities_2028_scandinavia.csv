@@ -1,0 +1,24 @@
+name;power_capacity (MW);energy_capacity (MWh)
+Nuclear;11277;
+Lignite;0;
+Hard Coal;867;
+Gas ;2869;
+Oil;889;
+Others non-renewable;736;
+Hydro - Pondage (Turbine);0;0
+Hydro - Run of River (Turbine);5609;
+Hydro - Reservoir (Turbine);32823;109292869
+Hydro - Pump Storage Open Loop (Turbine);245;15452782
+Hydro - Pump Storage Closed Loop (Turbine);0;0
+Hydro - Pump Storage Open Loop (Pumping);-299;15452782
+Hydro - Pump Storage Closed Loop (Pumping);0;0
+Wind Onshore;50267;
+Wind Offshore;4109;
+Solar (Thermal);0;
+Solar (Photovoltaic);26778;
+Biofuel;3153;
+Others renewable;7028;
+Batteries (Injection);424;971
+Batteries (Offtake);424;971
+Demand Side Response capacity;13802;
+Electrolyser;-8808;
