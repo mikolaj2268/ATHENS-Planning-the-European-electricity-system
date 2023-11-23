@@ -307,6 +307,7 @@ def add_poland(network: pypsa.Network(), climatic_year: int, time_horizon_in_hou
         Batteries = 0,
     )
     #In kg / MWh
+    #kd
     carriers_CO2 = dict(
         Battery = 0,
         Biofuel = 0,
