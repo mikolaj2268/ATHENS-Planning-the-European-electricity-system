@@ -42,7 +42,7 @@ def add_scandinavia(network: pypsa.Network(), climatic_year: int, time_horizon_i
     H2_max_hours = 300
     
     generators = [
-    {"name": f"{country}Fossils", "carrier": "Fossils", "p_nom": 5000, "p_min_pu": 0, "p_max_pu": 1, "marginal_cost": gas_marginal_costs, "efficiency": 0.4,
+    {"name": f"{country}Gas", "carrier": "Gas", "p_nom": 5000, "p_min_pu": 0, "p_max_pu": 1, "marginal_cost": gas_marginal_costs, "efficiency": 0.4,
      "committable": False, "min_up_time": 1, "min_down_time": 1},
     {"name": f"{country}BioEnergies", "carrier": "BioEnergies", "p_nom":11000, "p_min_pu": 0, "p_max_pu": 1, "marginal_cost": biomass_marginal_costs, "efficiency": 0.5, 
      "committable": False, "min_up_time": 1, "min_down_time": 1},
@@ -224,7 +224,7 @@ def add_iberian(network: pypsa.Network(), climatic_year: int, time_horizon_in_ho
     H2_max_hours = 0
     
     generators = [
-    {"name": f"{country}Fossils", "carrier": "Fossils", "p_nom": 2139, "p_min_pu": 0, "p_max_pu": 1, "marginal_cost": gas_marginal_costs, "efficiency": 0.4,
+    {"name": f"{country}-OCGT", "carrier": "Gas", "p_nom": 2139, "p_min_pu": 0, "p_max_pu": 1, "marginal_cost": gas_marginal_costs, "efficiency": 0.4,
      "committable": False, "min_up_time": 1, "min_down_time": 1},
     {"name": f"{country}BioEnergies", "carrier": "BioEnergies", "p_nom":0, "p_min_pu": 0, "p_max_pu": 1, "marginal_cost": biomass_marginal_costs, "efficiency": 0.5, 
      "committable": False, "min_up_time": 1, "min_down_time": 1},
@@ -364,15 +364,10 @@ def add_poland(network: pypsa.Network(), climatic_year: int, time_horizon_in_hou
                 carrier = "Others_renewable"
             marg_cost = carriers[carrier]
             min_up, min_down = carriers_min_up_down.get(carrier, (1, 1))
-            comm = True
-            #If there is no capacity, hydro is not committable and must run.
-            if carrier == "Wind" or carrier == "Solar" or carrier == "Hydro":
-                min_pu = 0
-                comm = False
-            try: 
-                network.add("Generator", country + "_" + name, bus=country, carrier=carrier, p_nom=row[capacity], marginal_cost=marg_cost, min_up_time=min_up, min_down_time=min_down, p_min_pu = min_pu, committable=comm)
-            except:
-                pass
+            comm = False
+            min_pu = 0
+
+            network.add("Generator", country + "_" + name, bus=country, carrier=carrier, p_nom=row[capacity], marginal_cost=marg_cost, min_up_time=min_up, min_down_time=min_down, p_min_pu = min_pu, committable=comm)
         elif row[capacity] > 0 and not np.isnan(row[ene_capacity]):
             name = index
             carrier = name.split(" ")[0]
