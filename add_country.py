@@ -122,11 +122,11 @@ def add_germany(network: pypsa.Network(), climatic_year: int, time_horizon_in_ho
     "Coal": FuelSources("Coal", .760, False, 24, 24, 160),
     "Gas": FuelSources("Gas", .370, False, 0, 0, 120),
     "Oil": FuelSources("Oil", .406, False, 1, 1, 100),
-    "Uranium": FuelSources("Uranium", 0, False, 48, 240, 10),
-    "Solar": FuelSources("Solar", 0, False, 0, 0, 5),
-    "Wind": FuelSources("Wind", 0, False, 0, 0, 5),
-    "Hydro": FuelSources("Hydro", 0, False, 0, 0, 5),
-    "Biomass": FuelSources("Biomass", 0, False, 12, 12, 10)
+    "Uranium": FuelSources("Uranium", 0.04, False, 48, 240, 10),
+    "Solar": FuelSources("Solar", 0.01, False, 0, 0, 5),
+    "Wind": FuelSources("Wind", 0.01, False, 0, 0, 5),
+    "Hydro": FuelSources("Hydro", 0.01, False, 0, 0, 5),
+    "Biomass": FuelSources("Biomass", 0.04, False, 12, 12, 10)
     }
 
     for fuel_source in fuel_sources.values():
@@ -309,17 +309,17 @@ def add_poland(network: pypsa.Network(), climatic_year: int, time_horizon_in_hou
     #kd
     carriers_CO2 = dict(
         Battery = 0,
-        Biofuel = 0,
+        Biofuel = 0.04,
         Coal = 0.760,
         Gas = 0.370,
         Oil = 0.406,
         Hydrogen = 0,
-        Hydro = 0,
-        Nuclear = 0,
+        Hydro = 0.01,
+        Nuclear = 0.01,
         Pumped = 0,
         Reservoir = 0,
-        Solar = 0,
-        Wind = 0,
+        Solar = 0.04,
+        Wind = 0.01,
         Failure = 0,
         Lignite = 0.800,
         Others_non_renewable = 0.400,
