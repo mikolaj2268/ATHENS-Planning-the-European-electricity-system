@@ -29,11 +29,12 @@ def add_scandinavia(network: pypsa.Network(), climatic_year: int, time_horizon_i
     coal_marginal_costs = 160
     gas_marginal_costs = 120
     oil_marginal_costs = 100
-    nuclear_marginal_costs = 40
-    hydro_marginal_costs = 2
-    wind_marginal_costs = 1
-    solar_marginal_costs = 3
-    biomass_marginal_costs = 10
+    nuclear_marginal_costs = 10
+    hydro_marginal_costs = 5
+    wind_marginal_costs = 5
+    solar_marginal_costs = 5
+    biomass_marginal_costs = 5
+
 
     reservoir_max_hours = 365*24
     pumped_max_hours = 100
@@ -55,15 +56,15 @@ def add_scandinavia(network: pypsa.Network(), climatic_year: int, time_horizon_i
      "min_up_time": 24, "min_down_time": 24},
     {"name": f"{country}Solar", "carrier": "Solar", "p_nom": 19000, "p_min_pu":solar.value, "p_max_pu": solar.value, "marginal_cost": solar_marginal_costs, "efficiency":1, "committable": False,
      "min_up_time": 1, "min_down_time": 1},
-    {"name": f"{country}Failure", "carrier": "Failure", "p_nom": 100000, "p_min_pu":0, "p_max_pu": 1, "marginal_cost": 1000, "efficiency":1, "committable": False,
-     "min_up_time": 1, "min_down_time": 1}
+    #{"name": f"{country}Failure", "carrier": "Failure", "p_nom": 100000, "p_min_pu":0, "p_max_pu": 1, "marginal_cost": 100000, "efficiency":1, "committable": False,
+     #"min_up_time": 1, "min_down_time": 1}
 ]
     
     storage_units = [
-        {"name": f"{country}Reservoir", "carrier": "Reservoir", "p_nom": 10000, "p_min_pu": 0, "p_max_pu": 1, "max_hours": reservoir_max_hours, "efficiency": 1, "cyclic_state_of_charge": True, "p_nom_discharge" : 100, "p_nom_charge" : 100},
-        {"name": f"{country}Pumped", "carrier": "Pumped", "p_nom": 1000, "p_min_pu": 0, "p_max_pu": 1, "max_hours": pumped_max_hours, "efficiency": 1, "cyclic_state_of_charge": True, "p_nom_discharge" : 100, "p_nom_charge" : 100},
-        {"name": f"{country}Battery", "carrier": "Battery", "p_nom": 500, "p_min_pu": 0, "p_max_pu": 1, "max_hours": battery_max_hours, "efficiency": 1, "cyclic_state_of_charge": True, "p_nom_discharge" : 100, "p_nom_charge" : 100},
-        {"name": f"{country}H2", "carrier": "H2", "p_nom": 0, "p_min_pu": 0, "p_max_pu": 1, "max_hours": H2_max_hours, "efficiency": 1, "cyclic_state_of_charge": True, "p_nom_discharge" :100, "p_nom_charge" : 100},
+        {"name": f"{country}Reservoir", "carrier": "Reservoir", "p_nom": 100000, "p_min_pu": 0, "p_max_pu": 1, "max_hours": reservoir_max_hours, "efficiency": 1, "cyclic_state_of_charge": True, "p_nom_discharge" : 100, "p_nom_charge" : 100},
+        {"name": f"{country}Pumped", "carrier": "Pumped", "p_nom": 100000, "p_min_pu": 0, "p_max_pu": 1, "max_hours": pumped_max_hours, "efficiency": 1, "cyclic_state_of_charge": True, "p_nom_discharge" : 100, "p_nom_charge" : 100},
+        {"name": f"{country}Battery", "carrier": "Battery", "p_nom": 100000, "p_min_pu": 0, "p_max_pu": 1, "max_hours": battery_max_hours, "efficiency": 1, "cyclic_state_of_charge": True, "p_nom_discharge" : 100, "p_nom_charge" : 100},
+        {"name": f"{country}H2", "carrier": "H2", "p_nom": 100000, "p_min_pu": 0, "p_max_pu": 1, "max_hours": H2_max_hours, "efficiency": 1, "cyclic_state_of_charge": True, "p_nom_discharge" :100, "p_nom_charge" : 100},
 ]
     
     for generator in generators:
@@ -122,10 +123,10 @@ def add_germany(network: pypsa.Network(), climatic_year: int, time_horizon_in_ho
     "Coal": FuelSources("Coal", 760, False, 24, 24, 160),
     "Gas": FuelSources("Gas", 370, False, 0, 0, 120),
     "Oil": FuelSources("Oil", 406, False, 1, 1, 100),
-    "Uranium": FuelSources("Uranium", 0, False, 48, 240, 40),
-    "Solar": FuelSources("Solar", 0, False, 0, 0, 2),
-    "Wind": FuelSources("Wind", 0, False, 0, 0, 1),
-    "Hydro": FuelSources("Hydro", 0, False, 0, 0, 3),
+    "Uranium": FuelSources("Uranium", 0, False, 48, 240, 10),
+    "Solar": FuelSources("Solar", 0, False, 0, 0, 5),
+    "Wind": FuelSources("Wind", 0, False, 0, 0, 5),
+    "Hydro": FuelSources("Hydro", 0, False, 0, 0, 5),
     "Biomass": FuelSources("Biomass", 0, False, 12, 12, 10)
     }
 
@@ -158,7 +159,7 @@ def add_germany(network: pypsa.Network(), climatic_year: int, time_horizon_in_ho
      "marginal_cost": fuel_sources["Oil"].primary_cost, "efficiency": 0.45,
      **(fuel_sources["Oil"].generator_characteristics())},
          {"name": "GER-Failure","bus": "Germany", "carrier": "Failure", "p_nom": 1000000, "p_min_pu": 0, "p_max_pu": 1,
-     "marginal_cost": 1000, "efficiency": 0.45,
+     "marginal_cost": 10000000, "efficiency": 0.45,
      **(fuel_sources["Gas"].generator_characteristics())},
 ]
 
@@ -210,11 +211,11 @@ def add_iberian(network: pypsa.Network(), climatic_year: int, time_horizon_in_ho
     coal_marginal_costs = 160
     gas_marginal_costs = 120
     oil_marginal_costs = 100
-    nuclear_marginal_costs = 40
-    hydro_marginal_costs = 2
-    wind_marginal_costs = 1
-    solar_marginal_costs = 3
-    biomass_marginal_costs = 10
+    nuclear_marginal_costs = 10
+    hydro_marginal_costs = 5
+    wind_marginal_costs = 5
+    solar_marginal_costs = 0
+    biomass_marginal_costs = 5
 
 
     reservoir_max_hours = 1058
@@ -237,7 +238,7 @@ def add_iberian(network: pypsa.Network(), climatic_year: int, time_horizon_in_ho
      "min_up_time": 24, "min_down_time": 24},
     {"name": f"{country}Solar", "carrier": "Solar", "p_nom": 80606, "p_min_pu": 0, "p_max_pu": solar.value.to_numpy(), "marginal_cost": solar_marginal_costs, "efficiency":1, "committable": False,
      "min_up_time": 1, "min_down_time": 1},
-    {"name": f"{country}Failure", "carrier": "Failure", "p_nom": 100000, "p_min_pu":0, "p_max_pu": 1, "marginal_cost": 1000, "efficiency":1, "committable": False,
+    {"name": f"{country}Failure", "carrier": "Failure", "p_nom": 100000, "p_min_pu":0, "p_max_pu": 1, "marginal_cost": 100000, "efficiency":1, "committable": False,
      "min_up_time": 1, "min_down_time": 1}
 ]
     
@@ -293,13 +294,13 @@ def add_poland(network: pypsa.Network(), climatic_year: int, time_horizon_in_hou
         Gas = 120,
         Oil = 100,
         Hydrogen = 0,
-        Hydro = 2,
+        Hydro = 0,
         Nuclear = 40,
         Pumped = 0,
         Reservoir = 0,
-        Solar = 3,
-        Wind = 1,
-        Failure = 1000,
+        Solar = 0,
+        Wind = 0,
+        Failure = 0,
         Lignite = 70,
         Others_non_renewable = 100,
         Others_renewable = 0,
@@ -415,12 +416,12 @@ def add_france(network: pypsa.Network(), climatic_year: int, time_horizon_in_hou
     
     network.add("Bus", name="France", x=2.33333, y=48.86667)
     
-    gas_marginal_costs = 120
-    nuclear_marginal_costs = 40
-    hydro_marginal_costs = 2
-    wind_marginal_costs = 1
-    solar_marginal_costs = 3
-    biomass_marginal_costs = 10
+    gas_marginal_costs = 70
+    nuclear_marginal_costs = 30
+    hydro_marginal_costs = 5
+    wind_marginal_costs = 5
+    solar_marginal_costs = 5
+    biomass_marginal_costs = 5
 
 
     reservoir_max_hours = 321
@@ -442,7 +443,7 @@ def add_france(network: pypsa.Network(), climatic_year: int, time_horizon_in_hou
      "min_up_time": 1, "min_down_time": 1},
     {"name": f"{country}Hydro", "carrier": "Hydro", "p_nom": 26900, "p_min_pu": 0, "p_max_pu": 1, "marginal_cost": hydro_marginal_costs, "efficiency": 0.9, "committable": True,
      "min_up_time": 1, "min_down_time": 1},
-    {"name": f"{country}Failure", "carrier": "Failure", "p_nom": 100000, "p_min_pu":0, "p_max_pu": 1, "marginal_cost": 1000, "efficiency":1, "committable": True,
+    {"name": f"{country}Failure", "carrier": "Failure", "p_nom": 100000, "p_min_pu":0, "p_max_pu": 1, "marginal_cost": 100000, "efficiency":1, "committable": True,
      "min_up_time": 1, "min_down_time": 1}
 ]
 
