@@ -377,7 +377,7 @@ def add_poland(network: pypsa.Network(), climatic_year: int, time_horizon_in_hou
             network.add("StorageUnit", country + "_" + name, bus=country, carrier=carrier, p_nom=row[capacity], marginal_cost=marg_cost, max_hours=max_hours, p_min_pu = -1, p_max_pu = 1)
 
     try:
-        network.add("Generator", f"{country}Failure", bus=country, carrier="Failure", p_nom=100000, marginal_cost=100000 , min_up_time=1, min_down_time=1, committable=True)
+        network.add("Generator", f"{country}Failure", bus=country, carrier="Failure", p_nom=100000, marginal_cost=100000 , min_up_time=1, min_down_time=1, committable=False)
     except:
         pass
 
@@ -429,20 +429,20 @@ def add_france(network: pypsa.Network(), climatic_year: int, time_horizon_in_hou
     
     generators = [
     {"name": f"{country}Nuclear", "carrier": "Nuclear", "p_nom": 59400, "p_min_pu": 0.3, "p_max_pu": 1, "marginal_cost": nuclear_marginal_costs, "efficiency": 0.33,
-     "committable": True, "min_up_time": 24, "min_down_time": 24},
+     "committable": False, "min_up_time": 24, "min_down_time": 24},
     {"name": f"{country}WindOnshore", "carrier": "Wind", "p_nom":11000, "p_min_pu": wind_on_shore.value, "p_max_pu": wind_on_shore.value, "marginal_cost": wind_marginal_costs, "efficiency": 0.4, 
-     "committable": True, "min_up_time": 1, "min_down_time": 1},
-    {"name": f"{country}WindOffshore", "carrier":"Wind", "p_nom": 5800, "p_min_pu": wind_off_shore.value, "p_max_pu": wind_off_shore.value, "marginal_cost": wind_marginal_costs, "efficiency": 0.5, "committable": True,
+     "committable": False, "min_up_time": 1, "min_down_time": 1},
+    {"name": f"{country}WindOffshore", "carrier":"Wind", "p_nom": 5800, "p_min_pu": wind_off_shore.value, "p_max_pu": wind_off_shore.value, "marginal_cost": wind_marginal_costs, "efficiency": 0.5, "committable": False,
      "min_up_time": 1, "min_down_time": 1},
-    {"name": f"{country}Solar", "carrier": "Solar", "p_nom": 47300, "p_min_pu":solar.value, "p_max_pu": solar.value, "marginal_cost": solar_marginal_costs, "efficiency": 0.12, "committable": True,
+    {"name": f"{country}Solar", "carrier": "Solar", "p_nom": 47300, "p_min_pu":solar.value, "p_max_pu": solar.value, "marginal_cost": solar_marginal_costs, "efficiency": 0.12, "committable": False,
      "min_up_time": 1, "min_down_time": 1},
-    {"name": f"{country}OCGT", "carrier": "H2", "p_nom": 6700, "p_min_pu": 0, "p_max_pu": 1, "marginal_cost": gas_marginal_costs, "efficiency": 0.5, "committable": True,
+    {"name": f"{country}OCGT", "carrier": "H2", "p_nom": 6700, "p_min_pu": 0, "p_max_pu": 1, "marginal_cost": gas_marginal_costs, "efficiency": 0.5, "committable": False,
      "min_up_time": 1, "min_down_time": 1},
-    {"name": f"{country}BioEnergies", "carrier": "BioEnergies", "p_nom": 2300, "p_min_pu":0, "p_max_pu": 1, "marginal_cost": biomass_marginal_costs, "efficiency": 0.3, "committable": True,
+    {"name": f"{country}BioEnergies", "carrier": "BioEnergies", "p_nom": 2300, "p_min_pu":0, "p_max_pu": 1, "marginal_cost": biomass_marginal_costs, "efficiency": 0.3, "committable": False,
      "min_up_time": 1, "min_down_time": 1},
-    {"name": f"{country}Hydro", "carrier": "Hydro", "p_nom": 26900, "p_min_pu": 0, "p_max_pu": 1, "marginal_cost": hydro_marginal_costs, "efficiency": 0.9, "committable": True,
+    {"name": f"{country}Hydro", "carrier": "Hydro", "p_nom": 26900, "p_min_pu": 0, "p_max_pu": 1, "marginal_cost": hydro_marginal_costs, "efficiency": 0.9, "committable": False,
      "min_up_time": 1, "min_down_time": 1},
-    {"name": f"{country}Failure", "carrier": "Failure", "p_nom": 100000, "p_min_pu":0, "p_max_pu": 1, "marginal_cost": 1000, "efficiency":1, "committable": True,
+    {"name": f"{country}Failure", "carrier": "Failure", "p_nom": 100000, "p_min_pu":0, "p_max_pu": 1, "marginal_cost": 1000, "efficiency":1, "committable": False,
      "min_up_time": 1, "min_down_time": 1}
 ]
 
