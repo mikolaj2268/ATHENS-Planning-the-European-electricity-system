@@ -120,9 +120,9 @@ def add_germany(network: pypsa.Network(), climatic_year: int, time_horizon_in_ho
             return self.return_as_dict(["committable", "min_up_time", "min_down_time"]) 
 
     fuel_sources = {
-    "Coal": FuelSources("Coal", 760, False, 24, 24, 160),
-    "Gas": FuelSources("Gas", 370, False, 0, 0, 120),
-    "Oil": FuelSources("Oil", 406, False, 1, 1, 100),
+    "Coal": FuelSources("Coal", .760, False, 24, 24, 160),
+    "Gas": FuelSources("Gas", .370, False, 0, 0, 120),
+    "Oil": FuelSources("Oil", .406, False, 1, 1, 100),
     "Uranium": FuelSources("Uranium", 0, False, 48, 240, 10),
     "Solar": FuelSources("Solar", 0, False, 0, 0, 5),
     "Wind": FuelSources("Wind", 0, False, 0, 0, 5),
@@ -306,14 +306,14 @@ def add_poland(network: pypsa.Network(), climatic_year: int, time_horizon_in_hou
         Others_renewable = 0,
         Batteries = 0,
     )
-    #In kg / MWh
+    #In t / MWh
     #kd
     carriers_CO2 = dict(
         Battery = 0,
         Biofuel = 0,
-        Coal = 760,
-        Gas = 370,
-        Oil = 406,
+        Coal = 0.760,
+        Gas = 0.370,
+        Oil = 0.406,
         Hydrogen = 0,
         Hydro = 0,
         Nuclear = 0,
@@ -322,8 +322,8 @@ def add_poland(network: pypsa.Network(), climatic_year: int, time_horizon_in_hou
         Solar = 0,
         Wind = 0,
         Failure = 0,
-        Lignite = 800,
-        Others_non_renewable = 400,
+        Lignite = 0.800,
+        Others_non_renewable = 0.400,
         Others_renewable = 0,
         Batteries = 0,
     )
